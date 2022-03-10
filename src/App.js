@@ -1,9 +1,12 @@
 import React from 'react';
+import './App.css';
+import SetGoals from './components/page/SetGoals';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <>
+      <SetGoals />
+    </>
   );
 }
 
