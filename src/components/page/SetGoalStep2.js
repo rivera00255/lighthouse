@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 function SetGoalStep2() {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
     return ( 
@@ -24,6 +24,9 @@ function SetGoalStep2() {
                     <label>
                         <input type='radio' value='custom' {...register('totalcount', {required : true})} /> 사용자 지정
                     </label>
+                    <div className='errorMessage'>
+                        {errors.totalcount?.type === 'required' && '기간을 선택해 주세요.'}
+                    </div>
                     <div className='desc'>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur

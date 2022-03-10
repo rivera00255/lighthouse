@@ -3,8 +3,11 @@ import { useForm } from 'react-hook-form';
 
 function SetGoalStep3({handleFormvalue, submitGoals}) {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
+
+    const today = new Date();
+    const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
     return ( 
         <div className='set-goals'>
@@ -19,11 +22,18 @@ function SetGoalStep3({handleFormvalue, submitGoals}) {
                 </div>
                 <div className='set-goals-content'>
                     <label>
-                        <input type='date' {...register('startDay' , {required : true})} />
+                        <input type='date' {...register('startDay' , {
+                            required : true,
+                            min : date
+                        })} />
                     </label>
                     <label>
                         <input type='date' {...register('endDay' , {required : true})} />
                     </label>
+                    <div className='errorMessage'>
+                        {errors.startDay?.type === 'required' && '시작일을 선택해 주세요.'}<br/>
+                        {errors.endDay?.type === 'required' && '종료일을 선택해 주세요.'}
+                    </div>
                     <div className='desc'>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur

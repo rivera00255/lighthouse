@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 function SetGoalStep1() {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data);
     };
@@ -20,7 +20,13 @@ function SetGoalStep1() {
                     </h3>
                 </div>
                 <div className='set-goals-content'>
-                    <input type='text' placeholder='목표를 입력하세요' {...register('goalTitle', {required : true})} />
+                    <input type='text' placeholder='목표를 입력하세요' {...register('goalTitle', {
+                        required : true,
+                        pattern : /^[A-Za-z가-힣]{5,40}$/
+                    })} /><br/>
+                    <div className='errorMessage'>
+                        {errors.goalTitle?.type === 'required' && '목표를 반드시 입력해주세요.'}
+                    </div>
                     <div className='desc'>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur

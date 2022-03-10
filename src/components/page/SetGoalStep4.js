@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 function SetGoalStep4({handleFormvalue, submitGoals}) {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
     return ( 
@@ -27,6 +27,9 @@ function SetGoalStep4({handleFormvalue, submitGoals}) {
                         <option value='6'>6</option>
                         <option value='7'>7</option>
                     </select>
+                    <div className='errorMessage'>
+                        {errors.weekCount?.type === 'required' && '실행 횟수를 선택해 주세요.'}
+                    </div>
                     <div className='desc'>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur
