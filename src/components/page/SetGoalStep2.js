@@ -1,9 +1,14 @@
 import React from 'react';
+import { useForm } from "react-hook-form";
 
-function SetGoalStep2({handleFormvalue, submitGoals}) {
+function SetGoalStep2() {
+
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
+
     return ( 
         <div className='set-goals'>
-            <form onSubmit={submitGoals}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='set-goals-title'>
                     <h2 className='main-title'>목표 설정</h2>
                     <h3 className='sub-title'>
@@ -14,10 +19,10 @@ function SetGoalStep2({handleFormvalue, submitGoals}) {
                 </div>
                 <div className='set-goals-content'>
                     <label>
-                        <input type='radio' name='totalCount' value='basic' onChange={handleFormvalue} /> 60일
+                        <input type='radio' value='basic' {...register('totalcount', {required : true})} /> 60일
                     </label>
                     <label>
-                        <input type='radio' name='totalCount' value='custom' onChange={handleFormvalue} /> 사용자 지정
+                        <input type='radio' value='custom' {...register('totalcount', {required : true})} /> 사용자 지정
                     </label>
                     <div className='desc'>
                         <p>
@@ -33,7 +38,9 @@ function SetGoalStep2({handleFormvalue, submitGoals}) {
                             qui officia deserunt mollit anim id est laborum.
                         </p>
                     </div>
-                    <button>다 음</button>
+                    <div className='button-wrapper'>
+                        <button>다 음</button>
+                    </div>
                 </div>
             </form>
         </div>
