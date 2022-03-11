@@ -20,15 +20,15 @@ function SetGoalStep5() {
                     <div className='set-goals-content'>
                         <div className='content'>
                             <h4>나의 목표</h4>
-                            <div className='goal'></div>
+                            <div className='goal-content'></div>
                         </div>
                         <div className='content'>
                             <h4>나의 목표 기간</h4>
-                            <div className='goal'></div>
+                            <div className='goal-content'></div>
                         </div>
                         <div className='content'>
                             <h4>나의 목표 실행 횟수</h4>
-                            <div className='goal'></div>
+                            <div className='goal-content'></div>
                         </div>
                         <div className='content'>
                             <h4>나의 목표에 대한 설명</h4>

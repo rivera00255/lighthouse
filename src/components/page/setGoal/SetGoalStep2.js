@@ -1,8 +1,8 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 
-function SetGoalStep3() {
+function SetGoalStep2() {
 
     const navigate = useNavigate();
 
@@ -10,12 +10,8 @@ function SetGoalStep3() {
 
     const onSubmit = data => {
         console.log(data);
-        // navigate();
+        navigate('/set/3');
     };
-
-    const today = new Date();
-    const startDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    const endDate = `${today.getFullYear() + 1}-${today.getMonth() + 1}-${today.getDate()}`;
 
     return ( 
         <div className='container'>
@@ -24,29 +20,20 @@ function SetGoalStep3() {
                     <div className='set-goals-title'>
                         <h2 className='main-title'>목표 설정</h2>
                         <h3 className='sub-title'>
-                            3 / 5 단계
+                            2 / 5 단계
                             <br />
-                            목표 시작일과 종료일을 지정해주세요.
+                            목표 기간을 선택하세요.
                         </h3>
                     </div>
                     <div className='set-goals-content'>
                         <label>
-                            <input type='date' {...register('startDay' , {
-                                required : true,
-                                min : startDate
-                            })} />
+                            <input type='radio' value='basic' {...register('totalcount', {required : true})} /> 60일
                         </label>
                         <label>
-                            <input type='date' {...register('endDay' , {
-                                required : true,
-                                max : endDate
-                            })} />
+                            <input type='radio' value='custom' {...register('totalcount', {required : true})} /> 사용자 지정
                         </label>
                         <div className='errorMessage'>
-                            {errors.startDay?.type === 'required' && '시작일을 선택해 주세요.'}
-                            {errors.startDay?.type === 'min' && '시작일은 오늘부터 선택 가능합니다.'}<br/>
-                            {errors.endDay?.type === 'required' && '종료일을 선택해 주세요.'}
-                            {errors.endDay?.type === 'max' && '종료일은 1년 이내로 지정해 주세요.'}
+                            {errors.totalcount?.type === 'required' && '기간을 선택해 주세요.'}
                         </div>
                         <div className='desc'>
                             <p>
@@ -72,4 +59,4 @@ function SetGoalStep3() {
      );
 }
 
-export default SetGoalStep3;
+export default SetGoalStep2;
