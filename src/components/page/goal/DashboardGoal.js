@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Goal() {
 
@@ -13,11 +14,11 @@ function Goal() {
                     <div className='goal-title goal'>목표명</div>
                     <div className='goal-desc goal'>설명</div>
                     <div className='goal-date goal'>기간</div>
-                    <form>
+                    <div className='goal-check'>
                         <label>오늘의 목표 체크</label>
                         <input type='checkbox' />
-                        <button>인증글 쓰기</button>
-                    </form>
+                        <button type='button'>인증글 쓰기</button>
+                    </div>
                     <div className='goal-progress'></div>
                     <div className='goal-charts'></div>
                     <div className='button-wrapper'>
@@ -26,10 +27,10 @@ function Goal() {
                 </div>    
                 <div className='post-wrapper'>
                     <div className='post'>
-                        <a href='#'>
+                        <Link to='/'>
                             <h4>post title</h4>
                             <p>post date</p>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

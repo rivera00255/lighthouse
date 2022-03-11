@@ -10,7 +10,8 @@ function SetGoalStep3() {
 
     const onSubmit = data => {
         console.log(data);
-        navigate('/set/4');
+        console.log(data.startDay);
+        // navigate('/set/4');
     };
 
     const today = new Date();
@@ -39,6 +40,7 @@ function SetGoalStep3() {
                         <label>
                             <input type='date' {...register('endDay' , {
                                 required : true,
+                                min : startDate,
                                 max : endDate
                             })} />
                         </label>

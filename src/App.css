@@ -17,8 +17,8 @@ a {
 }
 .set-goals {
   width: 90%;
-  min-height: 100vh;
-  margin: 0 auto;
+  min-height: 80vh;
+  margin: 10vh auto;
   background: #eee;
 }
 /* .set-goals-title */
@@ -60,6 +60,7 @@ a {
   justify-content: center;
   margin: 1rem 0;
 }
+/* setGoalStep5 */
 .resetBtn {
   margin-left: 2rem;
 }
@@ -99,7 +100,7 @@ a {
 .goal-wrapper button {
   padding: 0.2rem 2rem;
 }
-.goal-wrapper form {
+.goal-check {
   width: 400px;
   height: 80px;
   margin: 0 auto;
@@ -109,12 +110,12 @@ a {
   justify-content: center;
   align-items: center;
 }
-.goal-wrapper form input {
+.goal-check input {
   margin-left: 1rem;
   width: 1rem;
   height: 1rem;
 }
-.goal-wrapper form button {
+.goal-check button {
   margin-left: 2rem;
 }
 .deleteBtn {
@@ -145,5 +146,11 @@ a {
   }
   .set-goals-content input[type='text']{
     width: 80%;
+  }
+}
+
+@media (max-width:960px) {
+  .set-goals {
+    min-height: 100vh;
   }
 }
