@@ -7,7 +7,7 @@ import SetGoalStep2 from './components/page/setGoal/SetGoalStep2';
 import SetGoalStep3 from './components/page/setGoal/SetGoalStep3';
 import SetGoalStep4 from './components/page/setGoal/SetGoalStep4';
 import SetGoalStep5 from './components/page/setGoal/SetGoalStep5';
-import DashboardGoal from './components/page/goal/DashboardGoal';
+import Detail from './components/page/goal/Detail';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Route path='/set/3' element={<SetGoalStep3 />} />
           <Route path='/set/4' element={<SetGoalStep4 />} />
           <Route path='/set/5' element={<SetGoalStep5 />} />
-          <Route path='/goal' element={<DashboardGoal />} />
+          <Route path='/goal' element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
