@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
@@ -30,6 +30,12 @@ const SubTitle = styled.h3`
 margin: 2rem 0;
 `;
 
+const Input = styled.input`
+padding: 0.2rem 0.5rem;
+width: 3rem;
+border-radius: 20px;
+`;
+
 const ErrorMessage = styled.div`
 font-size: 0.8rem;
 margin: 0.5rem 0 0 1rem;
@@ -55,14 +61,18 @@ padding: 0.2rem 1rem;
 
 function SetGoalStep2() {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    
+    const { register, watch, handleSubmit, formState: { errors } } = useForm();
+
+    const watchCountType = watch('countType');
+    const watchCountNum = watch('totalCount');
+
     const onSubmit = data => {
         console.log(data);
-        // navigate('/set/3');
+        navigate('/set/3');
     };
+
 
     return ( 
         <Container>
@@ -76,13 +86,23 @@ function SetGoalStep2() {
                             목표 기간을 선택하세요.
                         </SubTitle>
                         <label>
-                            <input type='radio' value='basic' {...register('totalcount', {required : true})} /> 60일
+                            <input type='radio' value='basic' {...register('countType', { required: true })} /> 60일
+                            <input type='hidden' value='60' {...register('totalCount')} />
                         </label>
                         <label>
-                            <input type='radio' value='custom' {...register('totalcount', {required : true})} /> 사용자 지정
+                            <input type='radio' value='custom' {...register('countType', { required: true })} /> 사용자 지정
+                            {watchCountType === 'custom' && 
+                                <Input type='number' {...register('totalCount', {
+                                    required: true,
+                                    min : 7,
+                                    max : 365
+                                })}></Input> 
+                            }
                         </label>
                         <ErrorMessage>
-                            {errors.totalcount?.type === 'required' && '기간을 선택해 주세요.'}
+                            {errors.countType?.type === 'required' && '기간을 선택해 주세요.'}
+                            {(watchCountType === 'custom' && watchCountNum < 7) && '목표 기간을 최소 7일 이상으로 지정해 주세요.'}
+                            {(watchCountType === 'custom' && watchCountNum > 365) && '목표 기간을 최대 365일 이하로 지정해 주세요.'}
                         </ErrorMessage>
                         <Desc>
                             Lorem ipsum dolor sit amet, consectetur

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 width: 1200px;
@@ -60,11 +61,13 @@ padding: 0.2rem 1rem;
 
 function SetGoalStep1() {
 
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = data => {
         console.log(data);
-        // navigate('/set/2');
+        navigate('/set/2');
     };
 
     return ( 

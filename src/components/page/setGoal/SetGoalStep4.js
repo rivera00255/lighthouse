@@ -55,13 +55,13 @@ padding: 0.2rem 1rem;
 
 function SetGoalStep4() {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = data => {
         console.log(data);
-        // navigate('/set/5');
+        navigate('/set/5');
     };
 
     return ( 

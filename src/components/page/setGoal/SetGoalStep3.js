@@ -57,11 +57,18 @@ function SetGoalStep3() {
 
     // const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, watch, handleSubmit, formState: { errors } } = useForm();
+
+    const watchStartDay = watch('startDay');
+    const watchEndDay = watch('endDay');
     
     const onSubmit = data => {
         console.log(data);
         // navigate('/set/4');
+        if(data.endDay <= data.startDay) {
+            console.log('no good!');
+            // console.log(watchStartDay);
+        }
     };
 
     const today = new Date();
@@ -97,6 +104,7 @@ function SetGoalStep3() {
                             {errors.startDay?.type === 'min' && '시작일은 오늘부터 선택 가능합니다.'}<br/>
                             {errors.endDay?.type === 'required' && '종료일을 선택해 주세요.'}
                             {errors.endDay?.type === 'max' && '종료일은 1년 이내로 지정해 주세요.'}
+                            {watchStartDay >= watchEndDay && '목표 기간을 다시 확인하세요.'}
                         </ErrorMessage>
                         <Desc>
                             Lorem ipsum dolor sit amet, consectetur

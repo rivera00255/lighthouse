@@ -45,6 +45,12 @@ height: 80px;
 border-radius: 20px;
 `;
 
+const ErrorMessage = styled.div`
+font-size: 0.8rem;
+margin: 0.5rem 0 0 1rem;
+color: #888;
+`;
+
 const ButtonWrapper = styled.div`
 width: 100%;
 display: flex;
@@ -60,10 +66,16 @@ margin-left: ${props => props.marginLeft && '2rem'};
 
 function SetGoalStep5() {
 
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = data => {
         console.log(data);
+    };
+
+    const resetGoal = () => {
+        navigate('/');
     };
 
     return ( 
@@ -80,10 +92,13 @@ function SetGoalStep5() {
                             <h4>나의 목표 실행횟수</h4>
                             <Content></Content>
                             <h4>나의 목표에 대한 설명</h4>
-                            <Textarea {...register('goalDesc')}></Textarea>
+                            <Textarea {...register('goalDesc', {required : true})}></Textarea>
+                            <ErrorMessage>
+                            {errors.goalDesc?.type === 'required' && '목표에 대한 구체적인 설명을 입력해주세요.'}
+                            </ErrorMessage>
                         <ButtonWrapper>
-                            <Button>다 음</Button>
-                            <Button marginLeft type='button'>다시 등록하기</Button>
+                            <Button>등 록</Button>
+                            <Button marginLeft type='button' onClick={resetGoal}>다시 등록하기</Button>
                         </ButtonWrapper>
                     </Wrapper>
                 </form>
