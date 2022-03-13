@@ -14,12 +14,13 @@ width: 100%;
 const Title = styled.div`
 width: 800px;
 height: 100px;
+background: #fafafa;
 border-radius: 20px;
-background: #fad390;
+box-shadow: 3px 5px 10px #d7d7d7;
 display: flex;
 align-items: center;
 justify-content: center;
-margin: 1rem auto;
+margin: 2rem auto;
 `;
 
 const Desc = styled(Title)`
@@ -32,8 +33,9 @@ const Check = styled.form`
 width: 400px;
 height: 80px;
 margin: 0 auto;
+background: #fafafa;
 border-radius: 20px;
-background: #fad390;
+box-shadow: 3px 5px 10px #d7d7d7;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -46,8 +48,24 @@ height: 1rem;
 `;
 
 const Button = styled.button`
-padding: 0.2rem 1rem;
+padding: 0.5rem 3rem;
+border: none;
+box-shadow: 3px 4px 8px #b7b7b7;
+background: ${props => props.backgroundColor || '#416dea'};
+color: #fff;
+font-weight: bold;
+border-radius: 30px;
+margin: 1rem 0;
 margin-left: ${props => props.marginLeft && '2rem'};
+&:hover {
+    box-shadow: none;
+    background: ${props => props.hoverColor || 'linear-gradient(315deg, #89d8d3, #416dea 74%)'};
+}
+&:active {
+    box-shadow: none;
+    background: ${props => props.hoverColor || 'linear-gradient(315deg, #89d8d3, #416dea 74%)'};
+    box-shadow: 3px 4px 10px #bbb;
+}
 `;
 
 const ButtonWrapper = styled.div`
@@ -60,15 +78,18 @@ margin: 1rem 0;
 const Post = styled.div`
 width: 80%;
 margin: 0 auto;
-border-top: 1px solid #000;
-border-bottom: 1px solid #000;
+border-top: 1px solid #bbb;
+border-bottom: 1px solid #bbb;
 box-sizing: border-box;
 `;
 
 const StyledLink = styled.a`
-padding: 0.2rem 2rem;
+padding: 0.5rem 2rem;
 display: flex;
 justify-content: space-between;
+&:hover {
+    background: #fafafa;
+}
 `;
 
 function Detail() {
@@ -81,12 +102,12 @@ function Detail() {
                 <Check>
                     <label>오늘의 목표 체크</label>
                     <Input type='checkbox'></Input>
-                    <Button marginLeft>인증글쓰기</Button>
+                    <Button marginLeft>인증글 쓰기</Button>
                     {/* <Progress></Progress>
                     <Chart></Chart> */}
                 </Check>
                 <ButtonWrapper>
-                    <Button>포기</Button>
+                    <Button backgroundColor={'#373737'} hoverColor={'linear-gradient(315deg, #8e8e8e, #373737 74%)'}>포 기</Button>
                 </ButtonWrapper>
             </Wrapper>
             <Post>

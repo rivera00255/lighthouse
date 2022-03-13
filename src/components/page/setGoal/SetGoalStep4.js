@@ -12,7 +12,9 @@ const Setting = styled.div`
 width: 90%;
 min-height: 80vh;
 margin: 10vh auto;
-background: #eee;
+background: #fafafa;
+border-radius: 40px;
+box-shadow: 4px 8px 24px #d7d7d7;
 `;
 
 const Wrapper = styled.div`
@@ -49,7 +51,23 @@ margin: 1rem 0;
 `;
 
 const Button = styled.button`
-padding: 0.2rem 1rem;
+padding: 0.5rem 3rem;
+border: none;
+box-shadow: 3px 4px 8px #b7b7b7;
+background: #416dea;
+color: #fff;
+font-weight: bold;
+border-radius: 30px;
+margin: 1rem 0;
+&:hover {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+}
+&:active {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+    box-shadow: 3px 4px 10px #bbb;
+}
 `;
 
 
@@ -88,12 +106,8 @@ function SetGoalStep4() {
                             {errors.weekCount?.type === 'required' && '실행 횟수를 선택해 주세요.'}
                         </ErrorMessage>
                         <Desc>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut
-                            enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            목표 실천을 위한 주간 실행 횟수를 선택하세요.<br/>
+                            매일 매일 실천하거나 주중 원하는 횟수만큼 일정을 완수하세요.
                         </Desc>
                         <ButtonWrapper>
                             <Button>다 음</Button>

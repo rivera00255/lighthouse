@@ -12,7 +12,9 @@ const Setting = styled.div`
 width: 90%;
 min-height: 80vh;
 margin: 10vh auto;
-background: #eee;
+background: #fafafa;
+border-radius: 40px;
+box-shadow: 4px 8px 24px #d7d7d7;
 `;
 
 const Wrapper = styled.div`
@@ -31,9 +33,17 @@ margin: 2rem 0;
 `;
 
 const Input = styled.input`
-padding: 0.5rem 1rem;
+padding: 1rem;
+border: 0;
 width: 800px;
-border-radius: 20px;
+border-bottom: 1px solid #000;
+background: #fafafa;
+::placeholder {
+    color: #888;
+}
+&:focus {
+    outline: none;
+}
 `;
 
 const ErrorMessage = styled.div`
@@ -55,7 +65,23 @@ margin: 1rem 0;
 `;
 
 const Button = styled.button`
-padding: 0.2rem 1rem;
+padding: 0.5rem 3rem;
+border: none;
+box-shadow: 3px 4px 8px #b7b7b7;
+background: #416dea;
+color: #fff;
+font-weight: bold;
+border-radius: 30px;
+margin: 1rem 0;
+&:hover {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+}
+&:active {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+    box-shadow: 3px 4px 10px #bbb;
+}
 `;
 
 
@@ -66,7 +92,7 @@ function SetGoalStep1() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         navigate('/set/2');
     };
 
@@ -89,12 +115,9 @@ function SetGoalStep1() {
                             {errors.goalTitle?.type === 'required' && '목표를 반드시 입력해주세요.'}
                         </ErrorMessage>
                         <Desc>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut
-                            enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            달성하고자 하는 목표 한 가지를 입력하세요.<br/>
+                            실현하고 싶은 목표를 정확하게 설정하면 더욱 좋습니다.<br/>
+                            (40글자 이내로 입력해주세요.)
                         </Desc>
                         <ButtonWrapper>
                             <Button>다 음</Button>

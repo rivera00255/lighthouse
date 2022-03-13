@@ -12,7 +12,9 @@ const Setting = styled.div`
 width: 90%;
 min-height: 80vh;
 margin: 10vh auto;
-background: #eee;
+background: #fafafa;
+border-radius: 40px;
+box-shadow: 4px 8px 24px #d7d7d7;
 `;
 
 const Wrapper = styled.div`
@@ -55,7 +57,23 @@ margin: 1rem 0;
 `;
 
 const Button = styled.button`
-padding: 0.2rem 1rem;
+padding: 0.5rem 3rem;
+border: none;
+box-shadow: 3px 4px 8px #b7b7b7;
+background: #416dea;
+color: #fff;
+font-weight: bold;
+border-radius: 30px;
+margin: 1rem 0;
+&:hover {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+}
+&:active {
+    box-shadow: none;
+    background: linear-gradient(315deg, #89d8d3, #416dea 74%);
+    box-shadow: 3px 4px 10px #bbb;
+}
 `;
 
 
@@ -69,7 +87,7 @@ function SetGoalStep2() {
     const watchCountNum = watch('totalCount');
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         navigate('/set/3');
     };
 
@@ -105,12 +123,10 @@ function SetGoalStep2() {
                             {(watchCountType === 'custom' && watchCountNum > 365) && '목표 기간을 최대 365일 이하로 지정해 주세요.'}
                         </ErrorMessage>
                         <Desc>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut
-                            enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            의사 존 맥스웰은 우리의 뇌가 새로운 행동에 익숙해지는데 걸리는 
+                            최소한의 시간에 관해 이야기합니다.<br/> 새로운 습관에 적응해 자동으로 
+                            실천하기까지는 약 60여일의 시간이 필요합니다.<br/> 기본 60일 또는 원하는 
+                            실천 기간을 선택해주세요.
                         </Desc>
                         <ButtonWrapper>
                             <Button>다 음</Button>
