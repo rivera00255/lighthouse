@@ -83,7 +83,7 @@ border-bottom: 1px solid #bbb;
 box-sizing: border-box;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
 padding: 0.5rem 2rem;
 display: flex;
 justify-content: space-between;
@@ -111,7 +111,7 @@ function Detail() {
                 </ButtonWrapper>
             </Wrapper>
             <Post>
-                <StyledLink href='#'>
+                <StyledLink to='/'>
                     <h4>post title</h4>
                     <p>post date</p>
                 </StyledLink>
