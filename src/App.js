@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Detail from './components/page/goal/Detail';
 import SetGoal from './components/page/setGoal/SetGoal';
+import BadgeList from './components/page/badge/BadgeList';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/set/4' element={<SetGoal step='4' />} />
           <Route path='/set/5' element={<SetGoal step='5' />} />
           <Route path='/goal' element={<Detail />} />
+          <Route path='/badge' element={<BadgeList /> } />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
