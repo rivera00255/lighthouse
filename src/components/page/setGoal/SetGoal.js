@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { goalState } from '../../../Atom';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const Container = styled.div`
@@ -12,7 +14,7 @@ margin: 0 auto;
 `;
 
 const Setting = styled.div`
-width: 100%;
+width: 90%;
 min-height: 90vh;
 margin: 5vh auto;
 background: #fafafa;
@@ -137,6 +139,7 @@ function SetGoal({step}) {
     const minDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`; // 선택 가능한 최소 시작일, 오늘
     const endDayMinDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate() + 7}`; // 선택 가능한 종료일의 최소 시작일
     const maxDate = `${startDate.getFullYear() + 1}-${startDate.getMonth() + 1}-${startDate.getDate()}`; // 시작일부터 최대 1년 이내 종료일
+    const basicMaxDate = `${startDate.getFullYear()}-${startDate.getMonth() + 3}-${startDate.getDate()}`; // 기본 60일 설정 endDay 제한
 
     const totalTime = new Date(endDate) - new Date(startDate); // 목표 종료일 - 목표 시작일
     const totalDate = (totalTime / 1000 / 60 / 60 / 24) + 1; // 목표 기간(밀리세컨, 초, 분, 시)
@@ -146,7 +149,7 @@ function SetGoal({step}) {
         setGoal({
             ...goal,
             goalTitle : data.goalTitle,
-            totalCount : data.totalCount,
+            totalCount : totalDate,
             startDay : data.startDay,
             endDay : data.endDay,
             weekCount : data.weekCount,
@@ -159,8 +162,8 @@ function SetGoal({step}) {
             setGoalStep(prev => (parseInt(prev) + 1).toString);
             navigate(`/set/${parseInt(step)+1}`);
         }
+        console.log(totalDate);
         console.log(goal);
-        // console.log(totalDate);
     };
 
     const resetGoal = () => {
@@ -176,7 +179,7 @@ function SetGoal({step}) {
                     <Wrapper>
                         <MainTitle>목표 설정</MainTitle>
                         {
-                            (step && step === '1') && <>
+                            step === '1' && <>
                                 <SubTitle>
                                     1 / 5 단계
                                     <br />
@@ -200,7 +203,7 @@ function SetGoal({step}) {
                             </>
                         }
                         {
-                            (step && step === '2') && <>
+                            step === '2' && <>
                                 <SubTitle>
                                     2 / 5 단계
                                     <br />
@@ -237,7 +240,7 @@ function SetGoal({step}) {
                             </>
                         }
                         {
-                            (step && step === '3') && <>
+                            (step === '3' && goal.totalCount === '') && <>
                                 <SubTitle>
                                     3 / 5 단계
                                     <br />
@@ -267,6 +270,7 @@ function SetGoal({step}) {
                                 <Desc>
                                     실행 시작일과 종료일의 날짜를 선택하세요.<br/>
                                     최소 기간은 7일 이며 최대 365일까지 가능합니다.
+                                    {endDayMinDate}
                                 </Desc>
                                 <ButtonWrapper>
                                     <Button>다 음</Button>
@@ -274,7 +278,43 @@ function SetGoal({step}) {
                             </>
                         }
                         {
-                            (step && step === '4') && <>
+                            (step === '3' && goal.totalCount === '60') && <>
+                                <SubTitle>
+                                    3 / 5 단계
+                                    <br />
+                                    목표 시작일을 지정해주세요.
+                                </SubTitle>
+                                <label>
+                                    <input type='date' {...register('startDay' , {
+                                        required : true,
+                                        min : minDate
+                                    })} />
+                                </label>
+                                <label>
+                                    <input type='date' {...register('endDay' , {
+                                        required : true,
+                                        min : basicMaxDate
+                                    })} />
+                                </label>
+                                <ErrorMessage>
+                                    {errors.startDay?.type === 'required' && '시작일을 선택해 주세요.'}
+                                    {errors.startDay?.type === 'min' && '시작일은 오늘부터 선택 가능합니다.'}<br/>
+                                    {errors.endDay?.type === 'required' && '종료일을 선택해 주세요.'}
+                                    {errors.endDay?.type === 'min' && '종료일은 시작일부터 60일이 지난 날입니다.'}
+                                    {(watchStartDay && watchEndDay && watchStartDay >= watchEndDay) && '목표 기간을 다시 확인하세요.'}
+                                </ErrorMessage>
+                                <Desc>
+                                    기본 60일을 선택하셨습니다.<br/>
+                                    실행 시작일의 날짜를 선택하세요.<br/>
+                                    <strong>목표 종료일 : {basicMaxDate}</strong>
+                                </Desc>
+                                <ButtonWrapper>
+                                    <Button>다 음</Button>
+                                </ButtonWrapper>
+                            </>
+                        }
+                        {
+                            step === '4' && <>
                                 <SubTitle>
                                     4 / 5 단계
                                     <br />
@@ -302,7 +342,7 @@ function SetGoal({step}) {
                             </>
                         }
                         {
-                            (step && step === '5') && <>
+                            step === '5' && <>
                                 <SubTitle>5 / 5 단계</SubTitle>
                                     <h4>나의 목표</h4>
                                     <Content></Content>
