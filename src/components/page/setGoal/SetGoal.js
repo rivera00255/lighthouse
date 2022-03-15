@@ -143,7 +143,7 @@ function SetGoal({step}) {
     // endDay validation
     const basicEndDate = `${watchStartDate.getFullYear()}-${watchStartDate.getMonth() + 3}-${watchStartDate.getDate()}`; // 기본 60일 설정 endDay
     
-    const endDayMin = new Date(`${watchStartDate.getFullYear()}-${watchStartDate.getMonth() + 1}-${watchStartDate.getDate() + 7}`);
+    const endDayMin = new Date(`${watchStartDate.getFullYear()}-${watchStartDate.getMonth() + 1}-${watchStartDate.getDate() + 6}`);
     const endDayMinDate = `${endDayMin.getFullYear()}-${endDayMin.getMonth() + 1}-${endDayMin.getDate()}`; // 선택 가능한 종료일의 최소 시작일, 시작일 7일 이후
     const maxDate = `${watchStartDate.getFullYear() + 1}-${watchStartDate.getMonth() + 1}-${watchStartDate.getDate()}`; // 시작일부터 최대 1년 이내 종료일
 
@@ -157,7 +157,7 @@ function SetGoal({step}) {
             goalTitle : data.goalTitle,
             totalCount : (data.totalCount === '' && parseInt(step) >= 3) ? totalDate : data.totalCount,
             startDay : data.startDay,
-            endDay : (data.endDay === '' && parseInt(step) >= 3) ? basicEndDate : data.endDay,
+            endDay : ((data.endDay !== '60' && data.endDay !== '') && parseInt(step) >= 3) ? basicEndDate : data.endDay,
             weekCount : data.weekCount,
             goalDesc : data.goalDesc
         });
@@ -272,14 +272,14 @@ function SetGoal({step}) {
                                     {errors.endDay?.type === 'required' && '종료일을 선택해 주세요.'}
                                     {errors.endDay?.type === 'min' && '최소 기간은 7일 입니다.'}
                                     {errors.endDay?.type === 'max' && '종료일은 1년 이내로 지정해 주세요.'}
-                                    {(watchStartDay && watchEndDay && watchStartDay >= watchEndDay) && '목표 기간을 다시 확인하세요.'}
+                                    {(watchStartDay && watchEndDay && totalDate < 7) && '목표 기간을 다시 확인하세요.'}
                                 </ErrorMessage>
                                 <Desc>
                                     실행 시작일과 종료일의 날짜를 선택하세요.<br/>
                                     최소 기간은 7일 이며 최대 365일까지 가능합니다.
                                 </Desc>
                                 <ButtonWrapper>
-                                    <Button>다 음</Button>
+                                    <Button disabled={totalDate < 7}>다 음</Button>
                                 </ButtonWrapper>
                             </>
                         }
@@ -303,7 +303,7 @@ function SetGoal({step}) {
                                 <Desc>
                                     기본 60일을 선택하셨습니다.<br/>
                                     실행 시작일의 날짜를 선택하세요.<br/>
-                                    <strong>목표 종료일 : {basicEndDate}</strong>
+                                    <strong>목표 종료일 : {watchStartDay && basicEndDate}</strong>
                                 </Desc>
                                 <ButtonWrapper>
                                     <Button>다 음</Button>
