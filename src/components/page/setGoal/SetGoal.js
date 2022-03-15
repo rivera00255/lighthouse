@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { goalState } from '../../../Atom';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-
 
 const Container = styled.div`
 width: 1200px;
@@ -93,12 +90,6 @@ margin-left: ${props => props.marginLeft && '2rem'};
 }
 `;
 
-const InputNumber = styled.input`
-padding: 0.2rem 0.5rem;
-width: 3rem;
-border-radius: 20px;
-`;
-
 const Content = styled.div`
 width: 100%;
 height: 2rem;
@@ -125,15 +116,9 @@ function SetGoal({step}) {
 
     const { register, watch, handleSubmit, formState: { errors } } = useForm();
 
-    // const watchCountType = watch('countType');
-    // const watchCountNum = watch('totalCount');
-
     // step3
     const watchStartDay = watch('startDay');
     const watchEndDay = watch('endDay');
-
-    // const startDate = new Date(goal.startDay); // 목표 시작일
-    // const endDate = new Date(goal.endDay); // 목표 종료일
 
     // startDay validation
     const today = new Date();
@@ -218,22 +203,12 @@ function SetGoal({step}) {
                                 </SubTitle>
                                 <label>
                                     <input type='radio' value='60' {...register('totalCount', { required: true })} /> 60일
-                                    {/* <input type='hidden' value='60' {...register('totalCount')} /> */}
                                 </label>
                                 <label>
                                     <input type='radio' value='' {...register('totalCount', { required: true })} /> 사용자 지정
-                                    {/* {watchCountType === 'custom' && 
-                                        <InputNumber type='number' {...register('totalCount', {
-                                            required: true,
-                                            min : 7,
-                                            max : 365
-                                        })}></InputNumber> 
-                                    } */}
                                 </label>
                                 <ErrorMessage>
                                     {errors.countType?.type === 'required' && '기간을 선택해 주세요.'}
-                                    {/* {(watchCountType === 'custom' && watchCountNum < 7) && '목표 기간을 최소 7일 이상으로 지정해 주세요.'}
-                                    {(watchCountType === 'custom' && watchCountNum > 365) && '목표 기간을 최대 365일 이하로 지정해 주세요.'} */}
                                 </ErrorMessage>
                                 <Desc>
                                     의사 존 맥스웰은 우리의 뇌가 새로운 행동에 익숙해지는데 걸리는 
@@ -350,7 +325,7 @@ function SetGoal({step}) {
                                     <h4>나의 목표에 대한 설명</h4>
                                     <Textarea {...register('goalDesc', {required : true})}></Textarea>
                                     <ErrorMessage>
-                                    {errors.goalDesc?.type === 'required' && '목표에 대한 구체적인 설명을 입력해주세요.'}
+                                        {errors.goalDesc?.type === 'required' && '목표에 대한 구체적인 설명을 입력해주세요.'}
                                     </ErrorMessage>
                                 <ButtonWrapper>
                                     <Button>등 록</Button>
