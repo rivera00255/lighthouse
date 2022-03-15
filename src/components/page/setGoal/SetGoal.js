@@ -132,26 +132,34 @@ function SetGoal({step}) {
     const watchStartDay = watch('startDay');
     const watchEndDay = watch('endDay');
 
-    const startDate = new Date(goal.startDay); // 목표 시작일
-    const endDate = new Date(goal.endDay); // 목표 종료일
-    
-    const today = new Date();
-    const minDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`; // 선택 가능한 최소 시작일, 오늘
-    const endDayMinDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate() + 7}`; // 선택 가능한 종료일의 최소 시작일
-    const maxDate = `${startDate.getFullYear() + 1}-${startDate.getMonth() + 1}-${startDate.getDate()}`; // 시작일부터 최대 1년 이내 종료일
-    const basicMaxDate = `${startDate.getFullYear()}-${startDate.getMonth() + 3}-${startDate.getDate()}`; // 기본 60일 설정 endDay 제한
+    // const startDate = new Date(goal.startDay); // 목표 시작일
+    // const endDate = new Date(goal.endDay); // 목표 종료일
 
-    const totalTime = new Date(endDate) - new Date(startDate); // 목표 종료일 - 목표 시작일
-    const totalDate = (totalTime / 1000 / 60 / 60 / 24) + 1; // 목표 기간(밀리세컨, 초, 분, 시)
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const [startDate, setStartDate] = useState(date);
+    const [endDate, setEndDate] = useState(new Date(`${year}-${month + 2}-${day}`));
+
+    // const today = new Date();
+    // const minDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`; // 선택 가능한 최소 시작일, 오늘
+    // const endDayMinDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate() + 7}`; // 선택 가능한 종료일의 최소 시작일
+    // const maxDate = `${startDate.getFullYear() + 1}-${startDate.getMonth() + 1}-${startDate.getDate()}`; // 시작일부터 최대 1년 이내 종료일
+    // const basicMaxDate = `${startDate.getFullYear()}-${startDate.getMonth() + 3}-${startDate.getDate()}`; // 기본 60일 설정 endDay 제한
+
+    // const totalTime = new Date(endDate) - new Date(startDate); // 목표 종료일 - 목표 시작일
+    // const totalDate = (totalTime / 1000 / 60 / 60 / 24) + 1; // 목표 기간(밀리세컨, 초, 분, 시)
     
     const onSubmit = data => {
         // console.log(data);
         setGoal({
             ...goal,
             goalTitle : data.goalTitle,
-            totalCount : totalDate,
-            startDay : data.startDay,
-            endDay : data.endDay,
+            totalCount : data.totalCount,
+            startDay : `${year}-${month}-${day}`,
+            endDay : `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`,
             weekCount : data.weekCount,
             goalDesc : data.goalDesc
         });
@@ -162,8 +170,10 @@ function SetGoal({step}) {
             setGoalStep(prev => (parseInt(prev) + 1).toString);
             navigate(`/set/${parseInt(step)+1}`);
         }
-        console.log(totalDate);
-        console.log(goal);
+        // console.log(totalDate);
+        // console.log(goal);
+        console.log(startDate);
+        console.log(endDate);
     };
 
     const resetGoal = () => {
@@ -249,14 +259,11 @@ function SetGoal({step}) {
                                 <label>
                                     <input type='date' {...register('startDay' , {
                                         required : true,
-                                        min : minDate
                                     })} />
                                 </label>
                                 <label>
                                     <input type='date' {...register('endDay' , {
                                         required : true,
-                                        min : endDayMinDate,
-                                        max : maxDate
                                     })} />
                                 </label>
                                 <ErrorMessage>
@@ -270,7 +277,6 @@ function SetGoal({step}) {
                                 <Desc>
                                     실행 시작일과 종료일의 날짜를 선택하세요.<br/>
                                     최소 기간은 7일 이며 최대 365일까지 가능합니다.
-                                    {endDayMinDate}
                                 </Desc>
                                 <ButtonWrapper>
                                     <Button>다 음</Button>
@@ -285,16 +291,15 @@ function SetGoal({step}) {
                                     목표 시작일을 지정해주세요.
                                 </SubTitle>
                                 <label>
-                                    <input type='date' {...register('startDay' , {
-                                        required : true,
-                                        min : minDate
-                                    })} />
-                                </label>
-                                <label>
-                                    <input type='date' {...register('endDay' , {
-                                        required : true,
-                                        min : basicMaxDate
-                                    })} />
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    selectsStart
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    minDate={startDate}
+                                    dateFormat='yyyy-MM-dd'
+                                /> 
                                 </label>
                                 <ErrorMessage>
                                     {errors.startDay?.type === 'required' && '시작일을 선택해 주세요.'}
@@ -306,7 +311,7 @@ function SetGoal({step}) {
                                 <Desc>
                                     기본 60일을 선택하셨습니다.<br/>
                                     실행 시작일의 날짜를 선택하세요.<br/>
-                                    <strong>목표 종료일 : {basicMaxDate}</strong>
+                                    <strong>목표 종료일 : </strong>
                                 </Desc>
                                 <ButtonWrapper>
                                     <Button>다 음</Button>
