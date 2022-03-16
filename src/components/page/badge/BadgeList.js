@@ -22,23 +22,37 @@ margin: 2rem 0 1rem 0;
 
 const BadgeWrapper = styled.div`
 width: 800px;
-height: 400px;
+min-height: 400px;
+padding: 2rem 1rem;
 background: #fafafa;
 border-radius: 20px;
 box-shadow: 3px 5px 10px #d7d7d7;
 display: flex;
-justify-content: space-around;
 flex-wrap: wrap;
 margin: 0 auto;
 margin-bottom: 4rem;
 `;
 
 const Badge = styled.div`
-width: 100px;
-height: 100px;
-background: #416dea;
+width: 120px;
+height: 120px;
+background: #fafafa;
+box-shadow: 3px 5px 10px #d7d7d7;
 border-radius: 50%;
-margin: 40px 20px;
+margin: 24px 20px;
+position: relative;
+&:hover {
+    background: rgba(65, 109, 234, 0.1);
+}
+`;
+
+const BadgeCount = styled.div`
+font-size: 0.9rem;
+font-weight: bold;
+position: absolute;
+left: 50%;
+bottom: -2rem;
+transform: translateX(-50%);
 `;
 
 function BadgeList() {
@@ -48,31 +62,50 @@ function BadgeList() {
                 <Section>
                     <Title>특별 한정 배지</Title>
                     <BadgeWrapper>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
                     </BadgeWrapper>
                 </Section>
                 <Section>
                     <Title>목표 달성 배지</Title>
                     <BadgeWrapper>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
-                        <Badge></Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
+                        <Badge>
+                            <BadgeCount>1</BadgeCount>
+                        </Badge>
                     </BadgeWrapper>
                 </Section>
             </Wrapper>
